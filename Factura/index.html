@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="factura">
+
+    <div class="header">
+        <div class="empresa">
+            <h2><img src="./img/man-helmet-sunglasses-life-vest-600w-2725439023-removebg-preview.png">AVENTURA TOTAL</h2>
+            <p>El futuro es hoy..</p>
+        </div>
+        <div class="titulo">FACTURA</div>
+    </div>
+    
+
+    <div class="info">
+        <div>
+            <h4>Facturar a:</h4>
+            <p>Javier Pinto</p>
+            <p>calle 7 N7-37</p>
+            <p>Valle de san jose, Colombia</p>
+        </div>
+        <div class="datos">
+            <p><strong>Factura #:</strong> 52148</p>
+            <p><strong>Fecha:</strong> 01/02/2020</p>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>SL</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Cant.</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Chalecos salvavidas</td>
+                <td>$50.00</td>
+                <td>1</td>
+                <td>$50.00</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Chalecos kayak</td>
+                <td>$20.00</td>
+                <td>3</td>
+                <td>$60.00</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Camisa deportiva</td>
+                <td>$10.00</td>
+                <td>2</td>
+                <td>$20.00</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>chalecos gias</td>
+                <td>$90.00</td>
+                <td>1</td>
+                <td>$90.00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="totales">
+        <p>Subtotal: $220.00</p>
+        <p>Impuesto: 0%</p>
+        <h3>Total: $220.00</h3>
+    </div>
+
+    <div class="footer">
+        <p>Gracias por su compra..</p>
+    </div>
+</div>
+</body>
+</html>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background: #eaeaea;
+}
+
+.factura {
+    width: 700px;
+    margin: 40px auto;
+    background: white;
+    padding: auto;
+}
+
+.header {
+    background: #1f2937;
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+.empresa {
+    float: left;
+}
+
+.titulo {
+    float: right;
+    font-size: 30px;
+    color: #ff4d6d;
+    font-weight: bold;
+}
+
+.header::after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 5px;
+    background: #ff4d6d;
+    margin-top: 15px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f3f4f6;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.totales {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.totales h3 {
+    margin-top: 10px;
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+img{
+    height: 20%;
+    width: 20%;
+}
+</style>
