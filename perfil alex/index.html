@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tablero Dinámico</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.18.1/axios.js"></script>
+</head>
+
+<body>
+
+    <h1 id="titulo">Cargando...</h1>
+
+    <div id="contenedor" class="contenedor-tablas"></div>
+
+    <script>
+        async function cargarTablas() {
+            const parametroUrl = window.location.search;
+            const numeroDeTablas = parseInt(parametroUrl.replace('?', '')) || 100;
+
+            document.getElementById('titulo').textContent = `Mostrando ${numeroDeTablas} usuario(s)`;
+
+            let res = await axios.get(`https://randomuser.me/api/?results=${numeroDeTablas}`);
+            const contenedor = document.getElementById('contenedor');
+            
+            res.data.results.forEach((usuario, i) => {
+                const tarjetaWrapper = document.createElement('div');
+                tarjetaWrapper.classList.add('tarjeta-wrapper');
+
+                const generoTexto = usuario.gender === 'female' ? 'Femenino' : 'Masculino';
+
+                tarjetaWrapper.innerHTML = `
+                    <div class="tarjeta-usuario" onclick="verPerfil(${i})">
+                        <div>
+                            <img src="${usuario.picture.large}" alt="foto">
+                        </div>
+                        <div>
+                            <h3>${usuario.name.first} ${usuario.name.last}</h3>
+                        </div>
+                        <div class="texto">
+                            <p class="informacion">${generoTexto}</p>
+                            <p class="informacion">${usuario.dob.age} años</p>
+                        </div>
+                    </div>
+                    <button onclick="favoritos(${i})" class="estrella">⭐ Favoritos</button>
+                `;
+
+                contenedor.appendChild(tarjetaWrapper);
+            });
+            window.res = res;
+        }
+
+        function verPerfil(i) {
+            localStorage.setItem('usuarioSeleccionado', JSON.stringify(window.res.data.results[i]));
+            window.location.href = 'axios.html';
+        }
+
+        function favoritos(i) {
+            let listaFavoritos = JSON.parse(localStorage.getItem('listaFavoritos')) || [];
+            const usuarioSeleccionado = window.res.data.results[i];
+
+            const yaExiste = listaFavoritos.some(user => user.login.uuid === usuarioSeleccionado.login.uuid);
+
+            if (!yaExiste) {
+                listaFavoritos.push(usuarioSeleccionado);
+                localStorage.setItem('listaFavoritos', JSON.stringify(listaFavoritos));
+                alert('¡Usuario agregado a favoritos!');
+            } else {
+                alert('Este usuario ya está en tus favoritos');
+            }
+            localStorage.setItem('usuarioSeleccionado', JSON.stringify(window.res.data.results[i]));
+            window.location.href = 'favoritos.html';
+        }
+
+        cargarTablas();
+    </script>
+</body>
+
+</html>
